@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo%}
+Taxes Tracking
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<section class="align">
+
+    <div class="taxesForm">
+        <div class="taxesForm_header">
+            <h2>Taxes' Form</h2>
+        </div>
+
+        <form action="{% url 'formTaxes' %}" class="form" method="POST">
+            <div>
+                <label>Tax</label>
+                <select name="tax" required>
+                    <option disabled selected>Which Tax?</option>
+                    {% for x in list_all_taxes %}
+                    <option value="{{ x.id }}">{{ x.category }} - {{ x.tax }}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label>Amount of money</label>
+                <input type="number" name="money" placeholder="How much?">
+            </div>
+
+            <div>
+                <label>Day of payment</label>
+                <input type="date" name="pay_day">
+            </div>
+
+            <div>
+                <input class="button" type="submit" value="Done">
+            </div>
+        </form>
+    </div>
+
+    <div class="graphs">
+        <div>
+            <img src="{% static 'img/graph1.png' %}" width="500" height="450">
+        </div>
+
+        <div>
+            <img src="{% static 'img/graph2.png' %}" width="800" height="450">
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block js%}
+{% endblock %}

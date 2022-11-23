@@ -1,0 +1,14 @@
+##Librerias##
+#Python
+matplotlib==3.6.2
+seaborn==0.12.1
+pandas==1.5.1
+#Django
+Django==3.2.2
+requests==2.25.1
+djangorestframework==3.12.4
+django-filter==2.4.0
+django-rest-auth==0.9.5
+Pillow==7.1.2
+# Drivers para trabajar con Postgres en linux:
+psycopg2-binary>=2.8

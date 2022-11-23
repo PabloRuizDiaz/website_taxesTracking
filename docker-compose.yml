@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  db:
+    image: postgres
+    container_name: website_taxestracking_database
+    restart: always
+    volumes:
+      - ./database:/opt/website/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=website_taxestracking_database
+    ports:
+      - 5432:5432
+  
+
+  adminer:
+    container_name: website_taxestracking_adminer
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - "db"
+
+
+  website_taxestracking:
+    build: .
+    image: website_taxestracking
+    container_name: website_taxestracking
+    restart: always
+    volumes:
+      - type: bind
+        source: .
+        target: /opt/website
+    ports:
+      - "80:80"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - "db"
+    command: python website_taxestracking/manage.py runserver 0.0.0.0:80
